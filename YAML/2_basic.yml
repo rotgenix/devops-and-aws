@@ -1,0 +1,31 @@
+# Comment
+
+# Basic
+students:
+  student1:
+    name: "Raju Rastogi"
+    age: 10
+    passed: true
+    # List
+    subjects:
+      - Math
+      - English
+      - Science
+      - Hindi
+    # Dictionary
+    marks:
+      Math: 99
+      Science: 93
+
+  student2:
+    name: "Sham"
+    age: 10
+    passed: true
+    # List
+    subjects:
+      - Math
+      - Science
+    # Dictionary
+    marks:
+      Math: 95
+      Science: 92

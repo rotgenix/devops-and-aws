@@ -1,4 +1,22 @@
-# In YAML Data is stored in key value pair
+# Basics & Definition
+
+# A. YAML: YAML Ain't Markup Language
+
+# B. Data Serialization format used for
+# - Configuration files
+# - data exchange between languages
+
+# C. This is used to set initial configs for a s/w or actions that need to be performed based on events
+
+# D. Colons & Dashes:
+# - Colons: separate keys and values
+# - Dashes: denote items in a list
+
+# E. Comments: Comments start with a hash
+
+# F. In YAML Data is stored in key value pair
+
+# G. We can use yaml/ym; as extensions
 
 # 1. Introduction
 chai_type: masala_chai
