@@ -1,0 +1,147 @@
+# In YAML Data is stored in key value pair
+
+# 1. Introduction
+chai_type: masala_chai
+temperature: hot
+servings: 2
+brewing_times: 5
+
+# 2. Indentation
+chai_recipe:
+  # In this for indentation only two spaces are used, not a tab
+  base: black_tea
+  milk: whole_milk
+
+chai_recipe_two:
+  base: black_tea
+  milk: whole_milk
+
+# 3. Data Types
+# String, We can use any format for string
+chai_name: Masala Chai
+description: "Chai with cardamon, ginger"
+tagline: "The best chai in town"
+
+brewing_instructions: |
+  boil water
+  add tea leaves
+  add milk
+
+brewing_instructions_two: >
+  boil water
+  add tea leaves
+  add milk
+
+# Numbers
+cups_per_day: 3
+cups_per_day_two: 0xFF22FF
+
+# Boolean, we can use any format
+is_hot: true
+add_sugar: yes
+add_salt: no
+instant: on
+
+# Null values
+sweetner: null
+alternative_milk: ~
+
+# Timestamp
+morning_brew: 2025-01-15
+local_time: 2025-01-15 08:30:01
+
+# Collections (array)
+# Ideal and most used
+# We can have multiple data types
+spices:
+  - ginger
+  - cloves
+  - black_pepper
+  - true
+  - 200
+  # That's how it will look like
+  # spices: ["ginger", "cloves", "black_pepper", true, 200]
+
+spices_two: [cardamon, ginger, cloves]
+sleeping_times: [3, 2, 1]
+
+# Nested List
+chai_categories:
+  - name: Traditional
+    varities:
+      - Masala Chai
+      - Ginger Chai
+      - Cardamon Chai
+  - name: Modern
+    varities:
+      - Vanilla Chai
+      - Chocolate Chai
+
+# Dictionary or Map
+masala_chai:
+  ingredients:
+    tea: black_tea
+    liquid:
+      water: 200ml
+      milk: 100ml
+    spices:
+      ginger: 1_inch
+      cinnamon: 1_ stick
+  preparation:
+    method: simmer
+    duration: 5_minutes
+
+# Dictionary of lists
+chai_menu:
+  - name: Masala Chai
+    price: 30
+    size: regular
+
+  - name: Ginger Chai
+    price: 30
+    size: regular
+
+  # That's how it will look like
+  # chai_menu: [
+  #   {
+  #     name: "Masala Chai",
+  #     price: 30,
+  #     size: "regular"
+  #   },
+  #   {
+  #     name: "Ginger Chai",
+  #     price: 30,
+  #     size: "regular"
+  #   }
+  # ]
+
+# This is the base
+default_chai_base: &default_base
+  tea: black_tea
+  water: 200ml
+  brewing_time: 5
+
+morning_chai:
+  # above data
+  <<: *default_base
+  milk: 200ml
+
+  # That's how it will look like, in a single indentation
+  # tea: black_tea
+  # water: 200ml
+  # brewing_time: 5
+  # milk: 200ml
+
+evening_chai:
+  <<: *default_base
+  milk: 200ml
+
+# Explicit data typing, forced data conversation
+zip_code: !!str 12345
+count: !!int "123"
+
+# Set
+unique_spices: !!set
+  ? cardamon
+  ? ginger
+  ? coves
