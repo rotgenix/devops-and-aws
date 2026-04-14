@@ -1,6 +1,11 @@
 # Basics & Definition
 
 # A. YAML: YAML Ain't Markup Language
+# Data format, used to exchange data
+# Similar to XML & JSON
+# In YAML, you can store only data and not commands.
+
+#
 
 # B. Data Serialization format used for
 # - Configuration files
@@ -16,7 +21,7 @@
 
 # F. In YAML Data is stored in key value pair
 
-# G. We can use yaml/ym; as extensions
+# G. We can use yaml/yml as extensions
 
 # 1. Introduction
 chai_type: masala_chai
@@ -55,7 +60,7 @@ cups_per_day: 3
 cups_per_day_two: 0xFF22FF
 
 # Boolean, we can use any format
-is_hot: true
+is_hot: true # other values: True/true/yes/Yes/Y/y/
 add_sugar: yes
 add_salt: no
 instant: on
@@ -133,6 +138,7 @@ chai_menu:
   #   }
   # ]
 
+# ANCHOR & ALIAS
 # This is the base
 default_chai_base: &default_base
   tea: black_tea
@@ -163,3 +169,9 @@ unique_spices: !!set
   ? cardamon
   ? ginger
   ? coves
+
+# Document Separation
+doc1: "Document 1"
+
+---
+doc2: "Document 2"
