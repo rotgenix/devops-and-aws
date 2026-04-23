@@ -129,6 +129,7 @@ bash_execute:
     - bash ./basic.sh
     - touch newfile
 
+  # We use this to preserve the data
   artifacts:
     paths:
       # To preserve it
@@ -149,11 +150,44 @@ bash_execute:
     - echo "Password is $PASS"
 
 ---
-# Part 9: Email notification
+# Part 9: Deploy Manually
 
-bash_execute:
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
   script:
-    # $NAME This is defined in project > settings > CI/CD > variables, so it will be picked from there
-    - echo "Name is $NAME"
-    # $PASS This is defined in project > settings > CI/CD > variables, so it will be picked from there
-    - echo "Password is $PASS"
+    - echo "First Step"
+    - echo "Second step"
+
+test-job:
+  stage: test
+  script:
+    - echo "Testing Step"
+
+deploy_job:
+  stage: deploy
+  # Now the deploy can be run manually only
+  when: manual
+  script:
+    - echo "Deploy Step"
+
+---
+# Part 10: Predefined variables
+
+build:
+  script:
+    - echo $CI_COMMIT_AUTHOR
+
+---
+# Part 10: Working With GIT
+
+# Import project from git.
+# Write the .yml ci config file
+build:
+  image: node:latest
+  script:
+    - echo "Hi"
