@@ -1,0 +1,159 @@
+# Part 1: Creating single job
+
+# Build step
+
+# This is not a standard name/word/keyword. We can name it whatever we want
+build:
+  script:
+    - echo "First Step"
+    - echo "Second step"
+
+---
+# Part 2: Creating Multiple jobs
+
+# Now the issue in these multiple jobs is that they will start running simultaneously that's not what we want. So we will introduce stages in it.
+build:
+  script:
+    - echo "First Step"
+    - echo "Second step"
+
+test-job:
+  script:
+    - echo "Testing Step"
+
+deploy_job:
+  script:
+    - echo "Deploy Step"
+
+---
+# Part 3: Creating Multiple jobs with stages
+
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  script:
+    - echo "First Step"
+    - echo "Second step"
+
+test-job:
+  stage: test
+  script:
+    - echo "Testing Step"
+
+deploy_job:
+  stage: deploy
+  script:
+    - echo "Deploy Step"
+
+---
+# Part 4: Negative Test Case Handling
+
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  script:
+    # In this case this is wrong so it will fail
+    # So if any job fails then further will also fail, although we can run them manually from gitlab
+    - echos "First Step"
+    - echo "Second step"
+
+test-job:
+  stage: test
+  script:
+    - echo "Testing Step"
+
+deploy_job:
+  stage: deploy
+  script:
+    - echo "Deploy Step"
+
+---
+# Part 5: Before & After Script
+
+stages:
+  - build
+  - test
+  - deploy
+
+# Since it is outside/ in global scope so it is valid for all jobs so it will run for all jobs
+before_script:
+  - echo "Before Script"
+
+after_script:
+  - echo "After Script"
+
+build:
+  stage: build
+  # Since it is in local scope so it is valid for this job only
+  before_script:
+    - echo "Before Build Stage Script"
+  script:
+    # In this case this is wrong so it will fail
+    # So if any job fails then further will also fail, although we can run them manually from gitlab
+    - echo "First Step"
+    - echo "Second step"
+
+test-job:
+  stage: test
+  script:
+    - echo "Testing Step"
+
+deploy_job:
+  stage: deploy
+  script:
+    - echo "Deploy Step"
+
+---
+# Part 6: Executing BASH Scripts
+
+bash_execute:
+  script:
+    - bash ./basic.sh
+
+---
+# Part 7: Executing BASH Scripts
+
+bash_execute:
+  script:
+    - mkdir myfolder
+    - cp ./basic.sh myfolder/
+    - cd myfolder
+    - bash ./basic.sh
+    - touch newfile
+
+  artifacts:
+    paths:
+      # To preserve it
+      - "./myfolder"
+    untracked: false
+    when: on_success
+    access: all
+    expire_in: 30 days
+
+---
+# Part 8: Variables from Gitlab CI/CD Env
+
+bash_execute:
+  script:
+    # $NAME This is defined in project > settings > CI/CD > variables, so it will be picked from there
+    - echo "Name is $NAME"
+    # $PASS This is defined in project > settings > CI/CD > variables, so it will be picked from there
+    - echo "Password is $PASS"
+
+---
+# Part 9: Email notification
+
+bash_execute:
+  script:
+    # $NAME This is defined in project > settings > CI/CD > variables, so it will be picked from there
+    - echo "Name is $NAME"
+    # $PASS This is defined in project > settings > CI/CD > variables, so it will be picked from there
+    - echo "Password is $PASS"
